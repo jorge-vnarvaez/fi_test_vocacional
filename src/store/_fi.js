@@ -672,8 +672,6 @@ export const mixinFI = {
       this.$store.commit('no_consultado_testVocacional')
       this.$store.commit('si_consultando_test')
 
-      console.log('consultando');
-
       this.axios.get('', {
         params: {
           endpoint: 'cliente/udec.resultado_usuario_rut',

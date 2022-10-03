@@ -178,6 +178,14 @@
     <!-- ICONOS RRSS -->
     <IconosRrss />
     <!-- ICONOS RRSS -->
+
+    <!-- BOTON -->
+    <div class="d-flex justify-center pb-8">
+      <v-btn class="m-2" fab dark color="teal" @click="scrollToTop">
+        <v-icon dark> mdi-chevron-up </v-icon>
+      </v-btn>
+    </div>
+    <!-- BOTON -->
   </div>
 </template>
 
@@ -196,10 +204,15 @@ export default {
     };
   },
   mounted() {
+    this.consultarRespuestaTest();
+    console.log(this.resultadoCarreras);
     this.datosCarrera = this.resultadoCarreras;
     this.infoCarreraActiva = this.datosCarrera[0];
   },
   methods: {
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
     elegirCarrera(carrera) {
       this.infoCarreraActiva = this.datosCarrera.find(
         (carreraActiva) => carreraActiva.title === carrera
