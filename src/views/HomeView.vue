@@ -58,7 +58,7 @@
               outlined
               dense
               name="rut"
-              placeholder="Ej: 123456789 (sin puntos, sin guión)"
+              placeholder="Ej: 12345678-9 (sin puntos, con guión)"
               v-model="rut"
               :rules="[reglas.required, reglas.rut]"
               color="blue-grey"
@@ -99,7 +99,8 @@ export default {
           return pattern.test(value) || "Correo inválido.";
         },
         rut: (value) => {
-          return this.validarRut(value) || "Rut inválido.";
+          const pattern = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+          return this.validarRut(value) && pattern.test(value) || "Rut inválido.";
         },
       },
     };
@@ -123,7 +124,7 @@ export default {
   methods: {
     validarRut(rut) {
       let digito_verificador = rut.slice(-1);
-      let rut_sin_dv = rut.slice(0, this.rut.length - 1);
+      let rut_sin_dv = rut.slice(0, this.rut.length - 2);
 
       let serie = 2;
       let producto = 0;

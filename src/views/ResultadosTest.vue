@@ -155,10 +155,10 @@
       <!-- BOTONES -->
       <div class="d-flex mt-8 mb-8 justify-space-between">
         <v-btn :color="infoCarreraActiva.color" outlined rounded small
-          >Admisión</v-btn
+          ><a :href="infoCarreraActiva.admision" target="_blank" style="text-decoration: none">Admisión</a></v-btn
         >
         <v-btn :color="infoCarreraActiva.color" outlined rounded small
-          >Más info</v-btn
+          ><a :href="infoCarreraActiva.admision" target="_blank" style="text-decoration: none">Más info</a></v-btn
         >
       </div>
       <!-- BOTONES -->
@@ -184,7 +184,7 @@
     <!-- BOTON -->
     <div class="d-flex justify-center pb-8">
       <v-btn class="m-2" fab dark color="teal" @click="scrollToTop">
-        <v-icon dark> mdi-chevron-up </v-icon>
+        <v-icon dark> mdi-chevron-up</v-icon>
       </v-btn>
     </div>
     <!-- BOTON -->
