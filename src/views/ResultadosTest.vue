@@ -85,9 +85,11 @@
 
     <!-- BOTON VOLVER A REALIZAR TEST -->
     <div class="d-flex justify-center">
-      <v-btn color="blue darken-2" outlined rounded
+      <a href="https://form.typeform.com/to/DGCU5FKl" target="_blank" style="text-decoration: none">
+        <v-btn color="blue darken-2" outlined rounded
         >Volver a realizar el test</v-btn
-      >
+        >
+      </a>
     </div>
     <!-- BOTON VOLVER A REALIZAR TEST -->
 
@@ -204,8 +206,6 @@ export default {
     };
   },
   mounted() {
-    this.consultarRespuestaTest();
-    console.log(this.resultadoCarreras);
     this.datosCarrera = this.resultadoCarreras;
     this.infoCarreraActiva = this.datosCarrera[0];
   },

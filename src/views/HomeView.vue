@@ -32,12 +32,12 @@
           <span class="d-block text-center">
             No se encontró un resultado de <strong>Test Vocacional</strong>, si no lo has
             realizado, puedes hacerlo en el
-            <router-link to="/test-vocacional">siguiente enlace</router-link>
+            <a href="https://form.typeform.com/to/DGCU5FKl" target="_blank">siguiente enlace</a>
           </span>
         </v-card>
 
         <v-card
-          max-width="550px"
+          max-width="800px"
           class="pa-10 my-10 rounded-lg grey lighten-4 mb-auto"
           id="form-content"
         >
@@ -58,9 +58,9 @@
               outlined
               dense
               name="rut"
-              placeholder="Ej: 12345678-9 (sin puntos, con guión)"
+              placeholder="Ej: 123456789 (sin puntos, sin guión)"
               v-model="rut"
-              :rules="[reglas.required]"
+              :rules="[reglas.required, reglas.rut]"
               color="blue-grey"
             >
             </v-text-field>
@@ -86,6 +86,7 @@ export default {
   data() {
     return {
       formularioValido: false,
+      rutValido: false,
       in_process: false,
       no_realizado: false,
       correo: "",
@@ -96,6 +97,9 @@ export default {
           const pattern =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value) || "Correo inválido.";
+        },
+        rut: (value) => {
+          return this.validarRut(value) || "Rut inválido.";
         },
       },
     };
@@ -114,13 +118,43 @@ export default {
     },
     has_resultadoTestVocacional() {
       this.moveToResultados()
-      // this.$store.commit("no_testVocacional");
     },
   },
   methods: {
+    validarRut(rut) {
+      let digito_verificador = rut.slice(-1);
+      let rut_sin_dv = rut.slice(0, this.rut.length - 1);
+
+      let serie = 2;
+      let producto = 0;
+
+      for (let i = rut_sin_dv.length - 1; i >= 0; i--) {
+        producto += rut_sin_dv[i] * serie;
+        serie++;
+        if (serie > 7) {
+          serie = 2;
+        }
+      }
+
+
+      let parte_entera = producto / 11;
+      let resto = producto - (11 * Math.floor(parte_entera));
+      let dv = 11 - resto;
+
+      if (dv == 10) {
+        dv = "k";
+      } else if (dv == 11) {
+        dv = 0;
+      }
+
+
+      return dv == digito_verificador;
+    },
     submitForm() {
       this.$store.commit("setEmail", this.correo);
       this.$store.commit("setRut", this.rut);
+
+      this.rutValido = this.validarRut(this.rut);
 
       this.consultarRespuestaTest();
 
