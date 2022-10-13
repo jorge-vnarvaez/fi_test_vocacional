@@ -83,6 +83,10 @@
 
 <script>
 export default {
+  mounted() {
+    this.rut = this.$route.query.rut || "";
+    this.correo = this.$route.query.correo || "";
+  },
   data() {
     return {
       formularioValido: false,

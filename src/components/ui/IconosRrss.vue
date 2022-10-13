@@ -2,7 +2,7 @@
   <div>
     <v-container class="text-center mb-5">
       <div class="d-flex justify-center text-h6 text-lg-h3 font-weight-black text-center blue--text text--darken-4">
-        <span class="w-180">
+        <span class="w-lg-180">
           Síguenos en nuestras redes
         </span>
       </div>
